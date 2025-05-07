@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Unscroll -  AI Shopping Assistant",
+    "version": "1.0",
+    "description": "쿠팡 상품 요약을 빠르게 확인할 수 있는 확장 프로그램입니다.",
+    "action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": "assets/unscroll_icon.png"
+    },
+    "side_panel": {
+        "default_path": "sidepanel/sidepanel.html"
+    },
+    "background": {
+        "service_worker": "background/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://www.coupang.com/*"
+            ],
+            "js": [
+                "content/contentScript.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "sidePanel",
+        "scripting"
+    ]
+}

@@ -1,0 +1,6 @@
+/* popup.css: 팝업 UI 스타일 */
+body {
+  min-width: 400px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
