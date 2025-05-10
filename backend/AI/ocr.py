@@ -79,3 +79,15 @@ def img_to_text(img_stream, upscale_factor):
             prev_lines = set(current_lines)
 
     return " ".join(results) if results else ""
+
+# 받아온 이미지 파일들을 넣어 실행
+def run(img_files, upscale_factor = 3):
+    result = []
+    for img_file in img_files:
+        try:
+            text = img_to_text(img_file.stream, upscale_factor)
+            result.append(text)
+        except Exception as e:
+            result.append(f"Error: {str(e)}")
+
+    return " ".join(result)
