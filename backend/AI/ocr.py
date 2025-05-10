@@ -51,3 +51,31 @@ def preprocess_img(img_stream, upscale_factor):
         slices.append(img_gray)
 
     return slices
+
+# 유효 텍스트 확인
+def is_valid_line(line):
+    line = line.strip()
+
+    valid_ratio = len(re.findall(r'[A-Za-z0-9가-힣]', line)) / len(line)
+    special_ratio = len(re.findall(r'[^A-Za-z0-9가-힣\s]', line)) / len(line)
+    if re.search(r'[^A-Za-z0-9가-힣\s]{3,}', line):
+        return False
+    
+    return valid_ratio >= 0.7 and special_ratio < 0.3
+
+# OCR 및 텍스트 후처리
+def img_to_text(img_stream, upscale_factor):
+    preprocessed = preprocess_img(img_stream, upscale_factor)
+    results = []
+    prev_lines = set()
+
+    for s in preprocessed:
+        text = call_google_ocr_api(s)
+        if text:
+            lines = [line.strip() for line in text.splitlines() if line.strip() and is_valid_line(line)]
+            current_lines = [line for line in lines if line not in prev_lines]
+            
+            results.extend(current_lines)
+            prev_lines = set(current_lines)
+
+    return " ".join(results) if results else ""
