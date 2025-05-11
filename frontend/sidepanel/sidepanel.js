@@ -36,7 +36,7 @@ document.getElementById("btn-font").addEventListener("click", () => {
 // 스피커 버튼 기능 
 document.getElementById("btn-speak").addEventListener("click", () => {
   const text = document.getElementById("contentArea").innerText;
-  const utterance = new SpeechSynthesisUtterance(text);
-  speechSynthesis.speak(utterance);
+  const utterance = new SpeechSynthesisUtterance(text);  // 읽을 텍스트를 담은 음성 객체 생성 
+  speechSynthesis.speak(utterance); //웹브라우저에 내장된 음성합성 기능으로 텍스트 읽기 
 });
 
