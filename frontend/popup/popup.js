@@ -13,4 +13,7 @@ document.getElementById("summarizeBtn").addEventListener("click", async () => {
 
   // 실제로 열기 
   await chrome.sidePanel.open({ tabId: tab.id });
+
+  // 팝업 창 닫기
+  window.close();
 });
