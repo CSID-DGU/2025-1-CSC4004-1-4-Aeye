@@ -16,18 +16,33 @@
 
       <!-- 오른쪽 네비게이션 바 -->
       <div class="nav-bar">
-        
-        <button class="nav-btn" id="btn-basic">기본정보</button>
-        <button class="nav-btn" id="btn-detail">상세정보</button>
-        <button class="nav-btn" id="btn-review">리뷰요약</button>
+
+        <div class="tooltip">
+          <button class="nav-btn" id="btn-basic">기본정보</button>
+          <span class="tooltip-text">제품의 기본정보를 표시해줘요</span>
+        </div>
+        <div class="tooltip">
+          <button class="nav-btn" id="btn-detail">상세정보</button>
+          <span class="tooltip-text">제품의 상세정보를 표시해줘요</span>
+        </div>
+        <div class="tooltip">
+          <button class="nav-btn" id="btn-review">리뷰요약</button>
+          <span class="tooltip-text">리뷰를 요약해서 표시해줘요</span>
+        </div>
 
         <!-- 구분선 -->
         <div class="divider"></div>
 
-        <!-- 큰 글씨 버튼 -->
-        <button class="icon-btn" id="btn-font">A</button>
-        <!-- 스피커 버튼 -->
-        <button class="icon-btn" id="btn-speak">🔊</button>
+        <!-- 큰 글씨 버튼 (툴팁 포함) -->
+        <div class="tooltip">
+          <button class="icon-btn" id="btn-font">👀</button>
+          <span class="tooltip-text">글씨를 크게 만들어줘요</span>
+        </div>
+        <!-- 스피커 버튼 (툴팁 포함)-->
+        <div class="tooltip">
+          <button class="icon-btn" id="btn-speak">🔊</button>
+          <span class="tooltip-text">내용을 음성으로 읽어줘요</span>
+        </div>
       </div>
     </div>
     <script src="sidepanel.js"></script>

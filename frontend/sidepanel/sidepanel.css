@@ -49,6 +49,37 @@ body {
   background-color: #d0eaff;
 }
 
+.tooltip {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.tooltip-text {
+  visibility: hidden;  /*기본 상태에서는 안 보이게 설정*/
+  position: absolute;
+  right: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background-color: #333;   /* 말풍선 배경색: 어두운 회색 */
+  color: #fff;  /* 글자색: 흰색 */
+  padding: 5px 8px;      
+  border-radius: 6px;
+  font-size: 12px; 
+  white-space: nowrap; 
+  
+  opacity: 0;   /* 처음에는 투명하게 */
+  transition: opacity 0.2s;  /* 서서히 나타나도록 애니메이션 */
+  z-index: 9999;
+}
+
+/* 마우스를 올렸을 때 툴팁이 보이도록 */
+.tooltip:hover .tooltip-text {
+  visibility: visible; /* 보이게 만들기 */
+  opacity: 1;  /* 투명도 불투명하게 변경 */
+}
 .divider {
   width: 60%;
   height: 1px;
