@@ -1,0 +1,9 @@
+flask
+flask-cors
+openai
+python-dotenv
+pillow
+numpy
+opencv-python
+google-cloud-vision
+google-api-python-client

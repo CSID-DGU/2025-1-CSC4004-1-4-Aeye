@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                     return;
                                 }
                                 if (response && response.summary) {
-                                    summaryDiv.innerText = response.summary;
+                                    summaryDiv.innerText = response.summary.name;
                                 } else {
                                     summaryDiv.innerText = "No summary available.";
                                 }
