@@ -7,7 +7,7 @@ document.getElementById("summarizeBtn").addEventListener("click", async () => {
   // 해당 탭에서 sidepanel 열기
   await chrome.sidePanel.setOptions({
     tabId: tab.id,
-    path: "sidepanel/sidepanel.html",
+    path: "frontend/sidepanel/sidepanel.html",
     enabled: true,
   });
 
