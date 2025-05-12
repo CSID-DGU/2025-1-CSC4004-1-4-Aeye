@@ -40,6 +40,6 @@ body {
 }
 
 #summarizeBtn:hover {
-  background-color: #00bfff; /* 버튼 hover 시 조금 더 진한 하늘색 */
+  background-color: #57afe6; /* 버튼 hover 시 조금 더 진한 하늘색 */
   color: white;
 }
