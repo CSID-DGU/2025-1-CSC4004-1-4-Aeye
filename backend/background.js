@@ -77,7 +77,13 @@ async function summarize_2(data, sendResponse) {
         }
 
         console.log("✅ 정돈된 결과:\n", result);
-        sendResponse({ action: "summaryResponse", summary: result });
+        sendResponse({ action: "summaryResponse", summary: resultData });
+
+        // sidepanel로 데이터 전송
+        chrome.runtime.sendMessage({
+            action: "updateSidepanel",
+            data: resultData
+        });
     } catch (error) {
         console.error("🚫 Error during fetch:", error);
         sendResponse({ action: "summaryResponse", error: "An error occurred while summarizing." });
