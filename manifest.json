@@ -4,14 +4,14 @@
     "version": "1.0",
     "description": "쿠팡 상품 요약을 빠르게 확인할 수 있는 확장 프로그램입니다.",
     "action": {
-        "default_popup": "popup/popup.html",
-        "default_icon": "assets/unscroll_icon.png"
+        "default_popup": "frontend/popup/popup.html",
+        "default_icon": "frontend/assets/unscroll_icon.png"
     },
     "side_panel": {
-        "default_path": "sidepanel/sidepanel.html"
+        "default_path": "frontend/sidepanel/sidepanel.html"
     },
     "background": {
-        "service_worker": "background/background.js"
+        "service_worker": "backend/background.js"
     },
     "content_scripts": [
         {
@@ -19,12 +19,16 @@
                 "*://www.coupang.com/*"
             ],
             "js": [
-                "content/contentScript.js"
+                "frontend/content/contentScript.js"
             ]
         }
     ],
     "permissions": [
         "sidePanel",
-        "scripting"
+        "scripting",
+        "activeTab",
+        "scripting",
+        "storage",
+        "tabs"
     ]
 }
