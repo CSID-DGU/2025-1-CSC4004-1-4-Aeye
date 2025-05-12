@@ -10,7 +10,7 @@ body {
 }
 
 .nav-bar {
-  background-color: #f0f0f0;
+  background-color: #aadbfa;
   width: 60px;
   display: flex;
   flex-direction: column; /* 버튼들을 세로로 정렬 */
@@ -92,5 +92,39 @@ body {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+  font-size: 14px;
 }
 
+/* 큰 글씨 모드 */
+.content-area.large-font {
+  font-size: 24px;
+}
+
+.content-area.large-font .label {
+  font-size: 20px;
+}
+
+.content-area.large-font .value {
+  font-size: 19px;
+}
+
+/* 요약 정보 표시 구역 디자인 */
+.info-block {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333;
+  font-size: 14px;
+}
+
+.value {
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
