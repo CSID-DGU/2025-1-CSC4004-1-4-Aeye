@@ -1,5 +1,21 @@
 //import { cleanText } from './4_1.js';
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    // 이미지 URL 추출
+    if (request.action === 'EXTRACT_IMG') {
+        const container = document.querySelector('.product-detail-content-inside');
+        const imgs = container
+            ? Array.from(container.querySelectorAll('img'))
+                .filter(img => img.src && !img.src.startsWith('data:'))
+            : [];
+
+        const imgUrls = imgs.map(img => img.src);
+        sendResponse({ imgUrls });
+
+        return true;
+    }
+})
+
 document.addEventListener("DOMContentLoaded", function () {
     const summarizeButton = document.getElementById("summarizeBtn");
     const summaryDiv = document.getElementById("summaryContainer");

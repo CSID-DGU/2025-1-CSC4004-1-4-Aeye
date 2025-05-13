@@ -6,5 +6,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       enabled: true,
     });
     chrome.sidePanel.open();
+  } else if(message.type === "SUMMARIZE_PAGE") {
+    const tabId = message.tabId;
+    
+    // 이미지 URL 추출 메시지 전송 (contentScript.js)
+    chrome.tabs.sendMessage(tabId, { action: "EXTRACT_IMG"}, async(response) => {
+      const imgUrls = response.imgUrls;
+      }
+    );
   }
 });

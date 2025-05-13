@@ -4,6 +4,12 @@ document.getElementById("summarizeBtn").addEventListener("click", async () => {
   // 현재 탭을 가져옴 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
+  // 페이지 요약 메시지 전송 (background.js)
+  await chrome.runtime.sendMessage({
+    tabId: tab.id,
+    type: "SUMMARIZE_PAGE"
+  });
+
   // 해당 탭에서 sidepanel 열기
   await chrome.sidePanel.setOptions({
     tabId: tab.id,
