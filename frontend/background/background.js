@@ -3,7 +3,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "OPEN_SIDEPANEL") {
     chrome.sidePanel.setOptions({
       tabId: message.tabId,
-      path: "sidepanel/sidepanel.html",
+      path: "frontend/sidepanel/sidepanel.html",
       enabled: true,
     });
     chrome.sidePanel.open({ tabId: message.tabId });

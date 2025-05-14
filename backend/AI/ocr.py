@@ -88,7 +88,7 @@ def run(img_files, upscale_factor = 3):
     result = []
     for img_file in img_files:
         try:
-            text = img_to_text(img_file.stream, upscale_factor)
+            text = img_to_text(img_file, upscale_factor)
             result.append(text)
         except Exception as e:
             result.append(f"Error: {str(e)}")
