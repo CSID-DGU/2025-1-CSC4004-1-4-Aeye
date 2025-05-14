@@ -4,6 +4,9 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import json
+import AI.ocr as ocr
+from io import BytesIO
+import requests
 
 # .env 파일 로드
 load_dotenv()
@@ -134,7 +137,6 @@ def summarize_api():
     print("요약 시작")
     data = request.get_json()
     # 필수 필드 추출
-    #product_data = data.get("productData", {})
     name =data.get("name", "상품명 없음")
     price = data.get("price", "가격 없음")
     more_option = data.get("more_option", "옵션 없음")
@@ -144,9 +146,29 @@ def summarize_api():
     review_All=data.get("review_All", "리뷰 정보 없음")
     worstComment = data.get("worstCommentData", "최악의 리뷰 없음")
     reviewlegnth = data.get("review_length", "리뷰 길이 없음")
+    img_urls = data.get('imgUrls', [])
+
+    # 이미지 url -> 이미지 파일
+    img_files = []
+    for url in img_urls:
+        try:
+            response = requests.get(url, timeout=5)
+            response.raise_for_status()
+            img_files.append(BytesIO(response.content))
+        except Exception as e:
+            print('Error: ', e)
+
+    # OCR
+    try:
+         result = ocr.run(img_files)
+         print("OCR Result: ", result)
+    except Exception as e:
+         result = ''
+         print('Error: ', e)
+
     # 프롬프트 생성
     prompt = f"""
-상품명은----- \\n{name}\\n -----인데 출력할때 수정하지 말고 그대로 보여줘!, /////////////////
+    상품명은----- \\n{name}\\n -----인데 출력할때 수정하지 말고 그대로 보여줘!, /////////////////
     가격은----- \\n{price}\\n -----에서 제일 낮은 숫자고, 그게 바로 판매가야! 단위는 원!, 배송정보는 \n{shipping_fee}\n 인데, 언제 도착하는지만 걸러서 보여줘!,
     ////////////////사용자들의 평균 만족도는----- \\n{average_grade}\\n -----
     인데, %랑 항목을 사실대로 보여줘! /////////////////
