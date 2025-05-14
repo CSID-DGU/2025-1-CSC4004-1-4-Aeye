@@ -5,8 +5,11 @@ import io
 from google.cloud import vision
 from google.oauth2 import service_account
 import re
+import os
 
-credentials = service_account.Credentials.from_service_account_file('service-account-file.json')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_path = os.path.join(BASE_DIR, 'service-account-file.json')
+credentials = service_account.Credentials.from_service_account_file(json_path)
 vision_client = vision.ImageAnnotatorClient(credentials=credentials)
 
 # API 호출
@@ -85,7 +88,7 @@ def run(img_files, upscale_factor = 3):
     result = []
     for img_file in img_files:
         try:
-            text = img_to_text(img_file.stream, upscale_factor)
+            text = img_to_text(img_file, upscale_factor)
             result.append(text)
         except Exception as e:
             result.append(f"Error: {str(e)}")
