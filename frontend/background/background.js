@@ -2,10 +2,11 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "OPEN_SIDEPANEL") {
     chrome.sidePanel.setOptions({
+      tabId: message.tabId,
       path: "sidepanel/sidepanel.html",
       enabled: true,
     });
-    chrome.sidePanel.open();
+    chrome.sidePanel.open({ tabId: message.tabId });
   } else if(message.type === "SUMMARIZE_PAGE") {
     (async() => {
       const tabId = message.tabId;
@@ -85,7 +86,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
 
         console.log("✅ 정돈된 결과:\n", result);
-        
+        sendResponse()
+
         // sidepanel로 데이터 전송
         chrome.runtime.sendMessage({
           action: "UPDATE_SIDEPANEL",
@@ -93,6 +95,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
       } catch(e) {
         console.error("🚫 Error during fetch:", e);
+        sendResponse()
       }
     })();
     // 비동기 응답 허용

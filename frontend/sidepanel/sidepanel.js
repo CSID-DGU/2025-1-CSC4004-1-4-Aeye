@@ -52,7 +52,7 @@ document.getElementById("btn-speak").addEventListener("click", () => {
 
 // 메시지 수신 및 데이터 렌더링
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "updateSidepanel") {
+  if (message.action === "UPDATE_SIDEPANEL") {
     const contentArea = document.getElementById("contentArea");
    
     // 기본정보 렌더링
