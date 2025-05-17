@@ -62,20 +62,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       <p>가격: ${message.data.price || '가격 없음'}</p>
       <p>배송정보: ${message.data.shipping_fee || '배송 정보 없음'}</p>
     `;
+
+
+
   
     // 상세정보 렌더링
     detailInfo = `
       <h2>상세정보</h2>
-      <p>옵션정보: ${message.data.more_option || '옵션 없음'}</p>
       <p>평균만족도: ${message.data.average_grade || '평균 평점 없음'}</p>
+      <p>상세주요 : ${message.data.detailed_info|| '상세 정보 없음'}</p>
     `;
 
     // 리뷰요약 렌더링
     reviewSummary = `
       <h2>리뷰요약</h2>
       <p>리뷰 개수: ${message.data.review_length || '0'}</p>
-      <p>대표 리뷰: ${message.data.commentData || '리뷰 없음'}</p>
-      <p>부정 리뷰: ${message.data.worstCommentData || '부정 리뷰 없음'}</p>
+      <p>대표 리뷰: ${message.data.comment_data || '리뷰 없음'}</p>
     `;
     
     if(currentinfo === "basic"){
