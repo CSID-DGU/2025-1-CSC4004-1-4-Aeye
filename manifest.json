@@ -19,8 +19,11 @@
                 "*://www.coupang.com/*"
             ],
             "js": [
-                "frontend/content/contentScript.js"
+                "frontend/content/uiController.js"
             ]
+            
+
+            
         }
     ],
     "permissions": [
@@ -30,5 +33,11 @@
         "scripting",
         "storage",
         "tabs"
-    ]
+    ],
+    "web_accessible_resources": [
+  {
+    "resources": ["frontend/content/content.js"],
+    "matches": ["<all_urls>"]
+  }
+]
 }
