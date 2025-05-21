@@ -11,7 +11,7 @@
         "default_path": "frontend/sidepanel/sidepanel.html"
     },
     "background": {
-        "service_worker": "backend/background.js"
+        "service_worker": "frontend/background/background.js"
     },
     "content_scripts": [
         {
