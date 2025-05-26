@@ -4,7 +4,7 @@ body {
   padding: 20px;
   font-family: Arial, sans-serif;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
   height: 200px;  /*팝업 높이 조정*/
 }
@@ -40,6 +40,6 @@ body {
 }
 
 #summarizeBtn:hover {
-  background-color: #00bfff; /* 버튼 hover 시 조금 더 진한 하늘색 */
+  background-color: #57afe6; /* 버튼 hover 시 조금 더 진한 하늘색 */
   color: white;
 }
