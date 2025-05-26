@@ -53,3 +53,5 @@ Desktop.ini
 
 # === IntelliJ IDEA ===
 out/
+
+backend/AI/service-account-file.json
