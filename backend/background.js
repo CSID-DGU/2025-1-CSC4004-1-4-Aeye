@@ -1,5 +1,15 @@
+// backend/web_extension/background.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "summarizePage") {
+    console.log(request.action);
+    if (request.action === "OPEN_SIDEPANEL") {
+        chrome.sidePanel.setOptions({
+        tabId: request.tabId,
+        path: "../frontend/sidepanel/sidepanel.html",
+        enabled: true,
+        });
+        chrome.sidePanel.open({ tabId: request.tabId });
+    }
+    else if (request.action === "summarizePage") {
         const productData = request.productData || {};
         console.log("📦 받은 데이터:", productData);
         
