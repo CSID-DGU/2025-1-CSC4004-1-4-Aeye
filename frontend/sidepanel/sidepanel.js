@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     detailInfo = `
       <div class="info-block">
         <div class="label">🧾 옵션 정보</div>
-        <div class="value"> ${message.data.more_option || '옵션 없음'}</div>
+        <div class="value"> ${message.data.detailed_info || '옵션 없음'}</div>
       </div>
       <div class="info-block">
         <div class="label">⭐ 평균 만족도</div>
@@ -83,8 +83,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         <div class="value"> ${message.data.review_length || '0'}</div>
       </div>
       <div class="info-block">
+        <div class="label">📝 리뷰 정보</div>
+        <div class="value"> ${message.data.review_all || '리뷰 정보 없음'}</div>
+      </div>
+      <div class="info-block">
         <div class="label">👍 대표 리뷰</div>
-        <div class="value"> ${message.data.commentData || '리뷰 없음'}</div>
+        <div class="value"> ${message.data.comment_data || '리뷰 없음'}</div>
       </div>
     `;
     
