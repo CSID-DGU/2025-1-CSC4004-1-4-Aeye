@@ -19,7 +19,8 @@
                 "*://www.coupang.com/*"
             ],
             "js": [
-                "frontend/content/uiController.js"
+                "frontend/content/uiController.js",
+                "frontend/content/contentScript.js"
             ]
         }
     ],

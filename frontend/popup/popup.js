@@ -1,3 +1,4 @@
+// frontend/popup/popup.js
 // popup.js: 요약 버튼 클릭 시 sidePanel 열기
 document.getElementById("summarizeBtn").addEventListener("click", async () => {
   // sidePanel 요청 메시지 전송
@@ -7,14 +8,14 @@ document.getElementById("summarizeBtn").addEventListener("click", async () => {
   // sidepanel 열기 메시지 전송 (background.js)
   await chrome.runtime.sendMessage({
     tabId: tab.id,
-    type: "OPEN_SIDEPANEL"
+    action: "OPEN_SIDEPANEL"
   })
 
   // 페이지 요약 메시지 전송 (background.js)
-  await chrome.runtime.sendMessage({
-    tabId: tab.id,
-    type: "SUMMARIZE_PAGE"
-  });
+  // await chrome.runtime.sendMessage({
+  //   tabId: tab.id,
+  //   type: "SUMMARIZE_PAGE"
+  // });
 
   // 팝업 창 닫기
   window.close();
