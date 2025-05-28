@@ -13,8 +13,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // 배송 정보
         const shippingFee = document.querySelector('.shipping-fee-and-pdd-prod');
         basicData["shipping_fee"] = shippingFee ? shippingFee.textContent.trim().replace(/\s+/g, ' ') : '배송 정보 없음';
-        console.log("basic");
-        console.log(basicData);
+
         sendResponse(basicData);
         return true;
 
