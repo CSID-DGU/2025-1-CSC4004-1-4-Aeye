@@ -86,10 +86,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         <div class="label">👍 대표 리뷰</div>
         <div class="value"> ${message.data.commentData || '리뷰 없음'}</div>
       </div>
-      <div class="info-block">
-        <div class="label>⚠️ 부정 리뷰</div>
-        <div class="value"> ${message.data.worstCommentData || '부정 리뷰 없음'}</div>
-      </div>
     `;
     
     if(currentinfo === "basic"){
