@@ -11,7 +11,7 @@
         "default_path": "frontend/sidepanel/sidepanel.html"
     },
     "background": {
-        "service_worker": "backend/background.js"
+        "service_worker": "frontend/background/background.js"
     },
     "content_scripts": [
         {
@@ -19,7 +19,6 @@
                 "*://www.coupang.com/*"
             ],
             "js": [
-                "frontend/content/uiController.js",
                 "frontend/content/contentScript.js"
             ]
         }
@@ -31,11 +30,5 @@
         "scripting",
         "storage",
         "tabs"
-    ],
-    "web_accessible_resources": [
-  {
-    "resources": ["frontend/content/content.js"],
-    "matches": ["<all_urls>"]
-  }
-]
+    ]
 }
