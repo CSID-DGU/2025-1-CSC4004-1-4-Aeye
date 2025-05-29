@@ -27,8 +27,11 @@
         "sidePanel",
         "scripting",
         "activeTab",
-        "scripting",
         "storage",
         "tabs"
+    ],
+
+    "host_permissions": [
+        "https://asia-southeast1-texttospeech.googleapis.com/*"
     ]
 }
