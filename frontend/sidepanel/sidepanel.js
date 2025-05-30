@@ -1,5 +1,32 @@
 // sidepanel.js: 백그라운드로부터 상품 요약 정보를 수신
 
+// goole TTS API 키 
+const GOOGLE_TTS_KEY = "AIzaSyCyzM_BISF7DF2cBsLwe-OB4nnUAFjEUnc";
+const REGION_ENDPOINT = "https://asia-southeast1-texttospeech.googleapis.com";
+
+async function gTTS(text, voice = 'ko-KR-Chirp3-HD-Leda') {
+
+  const body = {
+    input: { text },
+    voice: { languageCode: 'ko-KR', name: voice},
+    audioConfig: { audioEncoding: 'MP3' }
+  };
+
+  const res = await fetch(
+    `${REGION_ENDPOINT}/v1/text:synthesize?key=${GOOGLE_TTS_KEY}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }
+  );
+
+  const { audioContent } = await res.json();
+
+  const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
+  await audio.play();
+}
+
 var basicInfo =`
     <h2>기본정보</h2>
     <p>제품명, 가격, 배송정보 표시</p>
@@ -36,12 +63,21 @@ document.getElementById("btn-font").addEventListener("click", () => {
   content.classList.toggle("large-font");
 });
 
+
+
 // 스피커 버튼 기능 
-document.getElementById("btn-speak").addEventListener("click", () => {
+document.getElementById("btn-speak").addEventListener("click", async () => {
   const text = document.getElementById("contentArea").innerText;
-  const utterance = new SpeechSynthesisUtterance(text);  // 읽을 텍스트를 담은 음성 객체 생성 
-  speechSynthesis.speak(utterance); //웹브라우저에 내장된 음성합성 기능으로 텍스트 읽기 
+  
+  try {
+    await gTTS(text);    // WaveNet/Neural 음성
+  } catch (e) {
+    console.error("GCP TTS 실패, 기본 음성으로 폴백");
+    const u = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(u);         // 로컬 TTS 백업
+  }
 });
+
 
 // 메시지 수신 및 데이터 렌더링
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -83,7 +119,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         <div class="value"> ${message.data.review_length || '0'}</div>
       </div>
       <div class="info-block">
-        <div class="label">📝 리뷰 정보</div>
+        <div class="label">📜 리뷰 정보</div>
         <div class="value"> ${message.data.review_all || '리뷰 정보 없음'}</div>
       </div>
       <div class="info-block">
