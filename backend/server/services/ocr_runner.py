@@ -1,6 +1,6 @@
 import requests
 from io import BytesIO
-from backend.AI import ocr
+from ...ocr import ocr
 
 def extract_text_from_images(image_paths):
     """

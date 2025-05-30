@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.review_summary import summarize_review_info
+from ..services.review_summary import summarize_review_info
 
 review_bp = Blueprint("review", __name__)
 
