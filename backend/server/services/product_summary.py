@@ -1,7 +1,9 @@
 from openai import OpenAI
+from dotenv import load_dotenv
 import os
 from .ocr_runner import extract_text_from_images
 
+load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def summarize_basic_info(basic_data):
@@ -19,7 +21,7 @@ def summarize_basic_info(basic_data):
     )
     return {"basic": response.choices[0].message.content}
 
-def summarize_detail_info_from_images(detail_data):
+def summarize_detail_info(detail_data):
     ocr_text = extract_text_from_images(detail_data.img_paths)
 
     prompt = f"""
