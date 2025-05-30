@@ -106,10 +106,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         <div class="label">🧾 옵션 정보</div>
         <div class="value"> ${message.data.detailed_info || '옵션 없음'}</div>
       </div>
-      <div class="info-block">
-        <div class="label">⭐ 평균 만족도</div>
-        <div class="value"> ${message.data.average_grade || '평균 평점 없음'}</div>
-      </div>
     `;
 
     // 리뷰요약 렌더링
@@ -126,6 +122,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         <div class="label">👍 대표 리뷰</div>
         <div class="value"> ${message.data.comment_data || '리뷰 없음'}</div>
       </div>
+      <div class="info-block">
+        <div class="label">⭐ 평균 만족도</div>
+        <div class="value"> ${message.data.average_grade || '평균 평점 없음'}</div>
+      </div>
+
     `;
     
     if(currentinfo === "basic"){
