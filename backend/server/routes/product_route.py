@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.product_summary import summarize_basic_info, summarize_detail_info
+from ..services.product_summary import summarize_basic_info, summarize_detail_info
 
 summary_bp = Blueprint("summary", __name__)
 
