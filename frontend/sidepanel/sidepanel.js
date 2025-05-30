@@ -81,62 +81,74 @@ document.getElementById("btn-speak").addEventListener("click", async () => {
 
 // 메시지 수신 및 데이터 렌더링
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "updateSidepanel") {
+  (async () => {
     const contentArea = document.getElementById("contentArea");
-   
-    // 기본정보 렌더링
-     basicInfo = `
-      <div class="info-block">
-        <div class="label">📦 상품명</div>
-        <div class="value"> ${message.data.name || '상품명 없음'}</div>
-      </div>
-      <div class="info-block">
-        <div class="label">💰 가격</div>
-        <div class="value"> ${message.data.price || '가격 없음'}</div>
-      </div>
-      <div class="info-block">
-        <div class="label">🚚 배송정보</div>
-        <div class="value"> ${message.data.shipping_fee || '배송 정보 없음'}</div>
-      </div>
-    `;
+    try {
+      if (message.action === "BASIC_SUMMARY_RESULT") {
+        basicInfo = `
+          <div class="info-block">
+            <div class="label">📦 상품명</div>
+            <div class="value"> ${message.data.name || '상품명 없음'}</div>
+          </div>
+          <div class="info-block">
+            <div class="label">💰 가격</div>
+            <div class="value"> ${message.data.price || '가격 없음'}</div>
+          </div>
+          <div class="info-block">
+            <div class="label">🚚 배송정보</div>
+            <div class="value"> ${message.data.shipping_fee || '배송 정보 없음'}</div>
+          </div>
+        `;
+      } else if (message.action === "DETAIL_SUMMARY_RESULT") {
+        detailInfo = `
+          <div class="info-block">
+            <div class="label">🧾 세부 정보</div>
+            <div class="value"> ${message.data.detail || '세부정보 없음'}</div>
+          </div>
+        `;
+      } else if (message.action === "REVIEW_SUMMARY_RESULT") {
+        reviewSummary = `
+          <div class="info-block">
+            <div class="label">📝 리뷰 개수</div>
+            <div class="value"> ${message.data.review_count || '0'}</div>
+          </div>
+          <div class="info-block">
+            <div class="label">📜 리뷰 정보</div>
+            <div class="value"> ${message.data.review_all || '리뷰 정보 없음'}</div>
+          </div>
+          <div class="info-block">
+            <div class="label">👍 대표 리뷰</div>
+            <div class="value"> ${message.data.comment_data || '리뷰 없음'}</div>
+            
+          </div>
+          <div class="info-block">
 
-    // 상세정보 렌더링
-    detailInfo = `
-      <div class="info-block">
-        <div class="label">🧾 옵션 정보</div>
-        <div class="value"> ${message.data.detailed_info || '옵션 없음'}</div>
-      </div>
-    `;
+            <div class="label">⭐ 평균 만족도</div>
+            <div class="value"> ${message.data.average_grade || '평균 평점 없음'}</div>
+          </div>
+        `;
+      } else {
+        // 처리할 메시지가 아니면 종료
+        return;
+      }
 
-    // 리뷰요약 렌더링
-    reviewSummary = `
-      <div class="info-block">
-        <div class="label">📝 리뷰 개수</div>
-        <div class="value"> ${message.data.review_length || '0'}</div>
-      </div>
-      <div class="info-block">
-        <div class="label">📜 리뷰 정보</div>
-        <div class="value"> ${message.data.review_all || '리뷰 정보 없음'}</div>
-      </div>
-      <div class="info-block">
-        <div class="label">👍 대표 리뷰</div>
-        <div class="value"> ${message.data.comment_data || '리뷰 없음'}</div>
-      </div>
-      <div class="info-block">
-        <div class="label">⭐ 평균 만족도</div>
-        <div class="value"> ${message.data.average_grade || '평균 평점 없음'}</div>
-      </div>
+      // 현재 탭에 맞는 정보 렌더링
+      if (currentinfo === "basic") {
+        contentArea.innerHTML = basicInfo;
+      } else if (currentinfo === "detail") {
+        contentArea.innerHTML = detailInfo;
+      } else if (currentinfo === "review") {
+        contentArea.innerHTML = reviewSummary;
+      }
 
-    `;
-    
-    if(currentinfo === "basic"){
-      contentArea.innerHTML = basicInfo;
+      // 필요하다면 sendResponse 호출
+      // sendResponse({ status: "ok" });
+    } catch (e) {
+      console.error("메시지 처리 중 오류:", e);
+      // sendResponse({ status: "error", error: e.toString() });
     }
-    else if(currentinfo === "detail"){
-      contentArea.innerHTML = detailInfo;
-    }
-    else if(currentinfo === "review"){
-      contentArea.innerHTML = reviewSummary;
-    }
-  }
+  })();
+
+  // 비동기 처리를 위해 true 반환
+  return true;
 });

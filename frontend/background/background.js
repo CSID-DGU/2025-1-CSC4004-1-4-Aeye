@@ -20,6 +20,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       const basicResult = await response.json();
       console.log("📥 서버 응답:", basicResult);
+      // 서버 응답을 sidePanel로 전달
+      chrome.runtime.sendMessage({ tabId: message.tabId, action: "BASIC_SUMMARY_RESULT", data: basicResult });
     });
 
   } else if(message.type === "SUMMARIZE_DETAIL") {
@@ -34,6 +36,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       const detailResult = await response.json();
       console.log("📥 서버 응답:", detailResult);
+      // 서버 응답을 sidePanel로 전달
+
+      chrome.runtime.sendMessage({ tabId: message.tabId, action: "DETAIL_SUMMARY_RESULT", data: detailResult });
     });
 
   } else if(message.type === "SUMMARIZE_REVIEW") {
@@ -48,6 +53,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       const reviewResult = await response.json();
       console.log("📥 서버 응답:", reviewResult);
+      // 서버 응답을 sidePanel로 전달
+      chrome.runtime.sendMessage({ tabId: message.tabId, action: "REVIEW_SUMMARY_RESULT", data: reviewResult });
     });
   }
 });
