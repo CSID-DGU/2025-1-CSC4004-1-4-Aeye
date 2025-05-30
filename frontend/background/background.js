@@ -10,7 +10,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   } else if(message.type === "SUMMARIZE_BASIC") {
     chrome.tabs.sendMessage(message.tabId, { action: "EXTRACT_BASIC" }, async (basicData) => {
-      console.log(basicData);
       const response = await fetch("http://localhost:5000/summary/basic", {
         method: "POST",
         headers: {
