@@ -12,7 +12,6 @@ async function gTTS(text, voice = 'ko-KR-Chirp3-HD-Leda') {
     audioConfig: { audioEncoding: 'MP3' }
   };
 
-  // 2. REST 호출
   const res = await fetch(
     `${REGION_ENDPOINT}/v1/text:synthesize?key=${GOOGLE_TTS_KEY}`,
     {
@@ -21,6 +20,7 @@ async function gTTS(text, voice = 'ko-KR-Chirp3-HD-Leda') {
       body: JSON.stringify(body)
     }
   );
+
   const { audioContent } = await res.json();
 
   const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
@@ -119,7 +119,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         <div class="value"> ${message.data.review_length || '0'}</div>
       </div>
       <div class="info-block">
-        <div class="label">📝 리뷰 정보</div>
+        <div class="label">📜 리뷰 정보</div>
         <div class="value"> ${message.data.review_all || '리뷰 정보 없음'}</div>
       </div>
       <div class="info-block">
