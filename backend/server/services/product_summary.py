@@ -7,9 +7,11 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def summarize_basic_info(basic_data):
-    prompt = f"""상품명은\n{basic_data.name}\n입니다. 원산지 부분은 제거하시고 보여주십시오.
-        가격은\n{basic_data.price}\n입니다. 그 중 제일 낮은 숫자가 판매가입니다. 단위로는 원을 붙여서 보여주십시오.
-        배송정보는\n{basic_data.shipping_fee}\n입니다. 언제 도착하는지만 보여주십시오.
+    prompt = f"""상품명은\n{basic_data["name"]}\n입니다. 원산지 부분은 제거하시고 보여주십시오.
+        가격은\n{basic_data["price"]}\n입니다. 그 중 제일 낮은 숫자가 판매가입니다. 단위로는 원을 붙여서 보여주십시오.
+        배송정보는\n{basic_data["shipping_fee"]}\n입니다. 언제 도착하는지만 보여주십시오.
+        이 정보를 토대로
+        상품명:\n가격:\n배송정보:\n형태로 보여주십시오.
         """
 
     response = client.chat.completions.create(
@@ -22,7 +24,7 @@ def summarize_basic_info(basic_data):
     return {"basic": response.choices[0].message.content}
 
 def summarize_detail_info(detail_data):
-    ocr_text = extract_text_from_images(detail_data.img_paths)
+    ocr_text = extract_text_from_images(detail_data["img_paths"])
 
     prompt = f"""
         ocr 정보는 다음과 같습니다.
