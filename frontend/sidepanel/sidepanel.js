@@ -28,19 +28,25 @@ async function gTTS(text, voice = 'ko-KR-Chirp3-HD-Leda') {
 }
 
 var basicInfo =`
-    <h2>기본정보</h2>
-    <p>제품명, 가격, 배송정보 표시</p>
+    <p>
+      <img id="loading" src="https://i.gifer.com/ZZ5H.gif" alt="로딩 중..." /><br>
+      제품의 기본 정보를 요약하는 중입니다...
+    </p>
   `;
 
 var detailInfo = `
-    <h2>상세정보</h2>
-    <p>보관방법, 주의사항, 특징</p>
-  `
+    <p>
+      <img id="loading" src="https://i.gifer.com/ZZ5H.gif" alt="로딩 중..." /><br>
+      제품의 상세 정보를 요약하는 중입니다...
+    </p>
+  `;
 
 var reviewSummary= `
-    <h2>리뷰요약</h2>
-    <p>리뷰 요약 내용 표시</p>
-  `
+    <p>
+      <img id="loading" src="https://i.gifer.com/ZZ5H.gif" alt="로딩 중..." /><br>
+      제품의 리뷰 정보를 요약하는 중입니다...
+    </p>
+  `;
 var currentinfo = "basic";
 document.getElementById("btn-basic").addEventListener("click", () => {
   document.getElementById("contentArea").innerHTML = basicInfo;
@@ -114,7 +120,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           </div>
           <div class="info-block">
             <div class="label">📜 리뷰 정보</div>
-            <div class="value"> ${message.data.review_all || '리뷰 정보 없음'}</div>
+            <div class="value"> ${message.data.review_info || '리뷰 정보 없음'}</div>
           </div>
           <div class="info-block">
             <div class="label">👍 대표 리뷰</div>

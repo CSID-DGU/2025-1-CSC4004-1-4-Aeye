@@ -128,3 +128,8 @@ body {
   line-height: 1.5;
   white-space: pre-wrap;
 }
+
+#loading {
+  height: 2em;
+  width: 2em;
+}
