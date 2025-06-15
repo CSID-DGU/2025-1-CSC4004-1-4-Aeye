@@ -39,8 +39,8 @@ def preprocess_img(img_stream, upscale_factor):
     height, width = img_gray.shape
 
     slices = []
-    if height > 1000 * upscale_factor:
-        step = 500 * upscale_factor
+    if height > 2000 * upscale_factor:
+        step = 1000 * upscale_factor
         overlap = 500
         y = 0
         while y < height:
