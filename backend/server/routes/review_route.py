@@ -7,5 +7,5 @@ review_bp = Blueprint("review", __name__)
 def review_summary():
     review_data = request.get_json()
     result = summarize_review_info(review_data)
-    result["review_count"] = review_data["review_count"]
+    
     return jsonify(result)
